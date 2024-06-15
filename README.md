@@ -38,7 +38,8 @@ A new action has now been added. It is called **Update posts**. This is an indep
 
 ### SmartCodes
 
-Three smartcodes are available. These have been added to a new post category. They return the name + link of the last post the user uploaded, and the date of publication.
+Three smartcodes are available. These have been added to a new post category. They return the name + link of the last post the user uploaded,
+and the date of publication.
 ![image](https://github.com/Lonsdale201/fluent-extend-triggers-and-actions/assets/23199033/34516af2-482e-4fbb-8975-52daadf599ed)
 
 ### JetEngine Macros
