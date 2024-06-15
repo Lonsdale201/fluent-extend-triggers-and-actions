@@ -3,9 +3,13 @@ Extra triggers, actions and others
 
 ## Desc
 
-This extension provides additional add-ons to Fluentcrm.
+This extension provides additional add-ons to FluentCRM.
 
-Two triggers are currently available, they only work with JetFormBuilder, so you can only use them if you have them installed.
+Five triggers are currently available:
+
+JetFormBuilder
+JetReview
+Amelia Booking
 
 > [!IMPORTANT]
 > Minimum PHP version: 7.4
@@ -30,9 +34,9 @@ In the right section the big button: <>Code click, and in the dropdown menu, sel
 
 ### Triggers
 
-The plugin add two new Triggers inside the JetFormbuilder category. One of work with any Submission action type, and one work only if the subscriber uploaded a new post. Both triggers you can select which form or forms were used for the submission.
-In the Insert post trigger, you csan select which post status
-![image](https://github.com/Lonsdale201/fluent-extend-triggers-and-actions/assets/23199033/0ecbdbf5-d880-4f6c-baf8-f1326a7ef8fa)
+The plugin add five Triggers with JetFormbuilder, Jetreview, and Amelia Booking.
+![image](https://github.com/Lonsdale201/fluent-extend-triggers-and-actions/assets/23199033/a4c373ae-5961-4ec8-af1f-b7aab8593d71)
+
 
 ### Actions
 
@@ -41,9 +45,7 @@ A new action has now been added. It is called **Update posts**. This is an indep
 
 ### SmartCodes
 
-Three smartcodes are available. These have been added to a new post category. They return the name + link of the last post the user uploaded,
-and the date of publication.
-
+Nine smartcodes are available. These have been added to a new post category, and six with the JetReview category.
 ![image](https://github.com/Lonsdale201/fluent-extend-triggers-and-actions/assets/23199033/b4c25727-695a-49e3-9f2a-a81fd91ab5de)
 
 
@@ -66,7 +68,20 @@ We will not stop here. I have a number of ideas for future additions and I'm als
 
 - [ ] JetBooking Triggers
 - [ ] JetAppointments Triggers 
-- [ ] JetReview Triggers
+- [X] JetReview Triggers
 - [ ] Data Store / Custom Content type compatibility
 - [ ] TutorLMS triggers
-- [ ] Amelia Triggers
+- [X] Amelia Triggers
+
+
+## CHANGELOG
+
+
+**V 1.1 2024.06.15**
+
+* New Triggers For Amelia Booking: Appointben created, Event booked
+* New Triggers for the JetReview - both work, submit, or approved
+* New Smartcodes for Jetreview
+
+**V 1.0 2024.06.15**
+Release the kraken
