@@ -37,6 +37,8 @@ In the right section the big button: <>Code click, and in the dropdown menu, sel
 The plugin add five Triggers with JetFormbuilder, Jetreview, and Amelia Booking.
 ![image](https://github.com/Lonsdale201/fluent-extend-triggers-and-actions/assets/23199033/a4c373ae-5961-4ec8-af1f-b7aab8593d71)
 
+**In the Jetreview, At the moment I can't authenticate the guest properly in the reviews, even though I have the contact in the crm. We will come back to it later.**
+
 
 ### Actions
 
