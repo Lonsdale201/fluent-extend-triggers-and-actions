@@ -9,9 +9,9 @@ This extension provides additional add-ons to FluentCRM.
 
 Five triggers are currently available:
 
-JetFormBuilder
-JetReview
-Amelia Booking
+* JetFormBuilder
+* JetReview
+* Amelia Booking
 
 > [!IMPORTANT]
 > Minimum PHP version: 7.4
