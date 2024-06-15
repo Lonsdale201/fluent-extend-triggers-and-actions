@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Fluent Extend Triggers and Actions
  * Description: Extra triggers, actions and others 
- * Version: 0.9
+ * Version: 1.0
  * Author: Soczó Kristóf
  * Author URI: https://github.com/Lonsdale201/fluent-extend-triggers-and-actions
  * Text Domain: hw-fluent-extendtriggers
