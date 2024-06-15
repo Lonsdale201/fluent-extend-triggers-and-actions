@@ -41,6 +41,18 @@ A new action has now been added. It is called **Update posts**. This is an indep
 Three smartcodes are available. These have been added to a new post category. They return the name + link of the last post the user uploaded, and the date of publication.
 ![image](https://github.com/Lonsdale201/fluent-extend-triggers-and-actions/assets/23199033/34516af2-482e-4fbb-8975-52daadf599ed)
 
+### JetEngine Macros
+
+Currently these macros are provided by the plugin you can use in the JetEngine Query Builder / Users query type:
+
+* Fluent CRM / WP Users
+* Fluent CRM Users with Contact Type
+* Fluent CRM Users with List
+* Fluent CRM Users with Status
+
+![image](https://github.com/Lonsdale201/fluent-extend-triggers-and-actions/assets/23199033/9b39ee82-e0cd-4fed-b267-2eeb7c02e4d1)
+
+
 ## Note
 We will not stop here. I have a number of ideas for future additions and I'm also interested in what you might need.
 
