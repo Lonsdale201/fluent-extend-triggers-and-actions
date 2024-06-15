@@ -1,0 +1,24 @@
+{
+    "name": "hellowp/hw-fluent-extendtriggers",
+    "description": "Custom extend trigger for the fluent crm",
+    "type": "wordpress-plugin",
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "HelloWP\\FluentExtendTriggers\\Includes\\": "includes/",
+            "HelloWP\\FluentExtendTriggers\\Triggers\\": "triggers/",
+            "HelloWP\\FluentExtendTriggers\\SmartCodes\\": "smartcodes/",
+            "HelloWP\\FluentExtendTriggers\\Actions\\": "actions/",
+            "HelloWP\\FluentExtendTriggers\\JEModules\\": "jemodules/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Soczó Kristóf",
+            "email": "lonsdale201@hotmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
