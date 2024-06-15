@@ -1,6 +1,8 @@
 # fluent-extend-triggers-and-actions
 Extra triggers, actions and others 
 
+## VERSION 1.1
+
 ## Desc
 
 This extension provides additional add-ons to FluentCRM.
