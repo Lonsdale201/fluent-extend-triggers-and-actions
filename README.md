@@ -22,6 +22,9 @@ Two triggers are currently available, they only work with JetFormBuilder, so you
 > [!Note]
 > The plugin supports at the moment JetFormBuilder for the Triggers
 
+## How to download?
+
+In the right section the green button: <>Code click, and in the dropdown menu, select the Download ZIP option. The downloaded file just upload it, you can easily install the downloaded file as an plugin within wordpress.
 
 ## Features
 
