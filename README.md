@@ -1,7 +1,7 @@
 # fluent-extend-triggers-and-actions
 Extra triggers, actions and others 
 
-## VERSION 1.1
+## CURRENT VERSION 1.2
 
 ## Desc
 
@@ -80,6 +80,10 @@ We will not stop here. I have a number of ideas for future additions and I'm als
 
 ## CHANGELOG
 
+**V 1.2 2024.06.16**
+
+* Two new trigger related to WooCommerce: Advanced new order (Created), Review added
+* One new action: Place order
 
 **V 1.1 2024.06.15**
 
