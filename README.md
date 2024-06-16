@@ -1,7 +1,7 @@
 # fluent-extend-triggers-and-actions
 Extra triggers, actions and others 
 
-## CURRENT VERSION 1.2
+## CURRENT VERSION 1.2.1
 
 ## Desc
 
@@ -79,6 +79,10 @@ We will not stop here. I have a number of ideas for future additions and I'm als
 
 
 ## CHANGELOG
+
+**V 1.2.1 2024.06.16**
+
+* Fixed missing JetFormBuilder trigger registration process
 
 **V 1.2 2024.06.16**
 
