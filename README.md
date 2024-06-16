@@ -1,4 +1,4 @@
-# fluent-extend-triggers-and-actions
+# Fluent Extend Triggers and Actions
 Extra triggers, actions and others 
 
 ## CURRENT VERSION 1.2.1
