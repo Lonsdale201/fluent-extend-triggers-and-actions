@@ -82,7 +82,7 @@ We will not stop here. I have a number of ideas for future additions and I'm als
 
 **V 1.2 2024.06.16**
 
-* Two new trigger related to WooCommerce: Advanced new order (Created), Review added
+* Two new trigger added to  WooCommerce: Advanced new order (Created), Review added
 * One new action: Place order
 
 **V 1.1 2024.06.15**
