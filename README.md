@@ -26,7 +26,7 @@ Five triggers are currently available:
 > Minimum WordPress version: 6.0
 
 > [!Note]
-> The plugin supports at the moment JetFormBuilder for the Triggers
+> The plugin supports at the moment Jetformbuilder, Jetreviews, Amelia, Woocommerce for the Triggers
 
 ## How to download?
 
