@@ -12,6 +12,7 @@ Five triggers are currently available:
 * JetFormBuilder
 * JetReview
 * Amelia Booking
+* WooCommerce
 
 > [!IMPORTANT]
 > Minimum PHP version: 7.4
