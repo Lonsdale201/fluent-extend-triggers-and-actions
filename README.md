@@ -7,7 +7,7 @@ Extra triggers, actions and others
 
 This extension provides additional add-ons to FluentCRM.
 
-Five triggers are currently available:
+7 triggers are currently available:
 
 * JetFormBuilder
 * JetReview
@@ -37,7 +37,7 @@ In the right section the big button: <>Code click, and in the dropdown menu, sel
 
 ### Triggers
 
-The plugin add five Triggers with JetFormbuilder, Jetreview, and Amelia Booking.
+The plugin add seven Triggers with JetFormbuilder, Jetreview, Amelia, and WooCommerce
 ![image](https://github.com/Lonsdale201/fluent-extend-triggers-and-actions/assets/23199033/a4c373ae-5961-4ec8-af1f-b7aab8593d71)
 
 **In the Jetreview, At the moment I can't authenticate the guest properly in the reviews, even though I have the contact in the crm. We will come back to it later.**
