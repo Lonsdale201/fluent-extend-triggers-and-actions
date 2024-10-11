@@ -76,10 +76,12 @@ We will not stop here. I have a number of ideas for future additions and I'm als
 - [X] JetReview Triggers
 - [ ] Data Store / Custom Content type compatibility
 - [ ] TutorLMS triggers
-- [X] Amelia Triggers
+- [ ] Amelia Triggers
 
 
 ## CHANGELOG
+
+Still isue with Amelia booking
 
 **V 1.2.1 2024.06.16**
 
