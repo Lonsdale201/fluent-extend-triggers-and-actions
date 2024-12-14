@@ -1,5 +1,5 @@
 # Fluent Extend Triggers and Actions
-Extra triggers, actions and others 
+Extra triggers, actions and others for WooCommerce, Wordpress, JetFormBuilder, Jetreviews
 
 ## CURRENT VERSION 1.2.1
 
@@ -11,8 +11,8 @@ This extension provides additional add-ons to FluentCRM.
 
 * JetFormBuilder
 * JetReview
-* Amelia Booking
 * WooCommerce
+* Standard WordPress
 
 > [!IMPORTANT]
 > Minimum PHP version: 7.4
@@ -27,7 +27,7 @@ This extension provides additional add-ons to FluentCRM.
 > Minimum WordPress version: 6.0
 
 > [!Note]
-> The plugin supports at the moment Jetformbuilder, Jetreviews, Amelia, Woocommerce for the Triggers
+> The plugin supports at the moment Jetformbuilder, Jetreviews, Woocommerce for the Triggers
 
 ## How to download?
 
@@ -37,8 +37,15 @@ In the right section the big button: <>Code click, and in the dropdown menu, sel
 
 ### Triggers
 
-The plugin add seven Triggers with JetFormbuilder, Jetreview, Amelia, and WooCommerce
-![image](https://github.com/Lonsdale201/fluent-extend-triggers-and-actions/assets/23199033/a4c373ae-5961-4ec8-af1f-b7aab8593d71)
+The plugin add seven Triggers with JetFormbuilder, Jetreview, and WooCommerce
+
+* Advanced New Order (Created) | WooCommerce
+* JetReview Event | JetRreview
+* JetFormBuilder Post Insert | JetFormBuilder
+* JetFormBuilder Form Submission | JetFormBuilder
+* JetFormBuilder Update User | JetFormBuilder
+* User Role Changed | WordPress
+* Review Added | WooCommerce
 
 **In the Jetreview, At the moment I can't authenticate the guest properly in the reviews, even though I have the contact in the crm. We will come back to it later.**
 
@@ -76,27 +83,38 @@ We will not stop here. I have a number of ideas for future additions and I'm als
 - [X] JetReview Triggers
 - [ ] Data Store / Custom Content type compatibility
 - [ ] TutorLMS triggers
-- [ ] Amelia Triggers
 
 
 ## CHANGELOG
 
-Still isue with Amelia booking
+**V 1.3 2024.12.14**
+
+* fixed a bug where the default fluent functions (actions, smartcodes) were not available for the Advanced New Order (Created) trigger
+* New trigger: User role changed
+* Improved exiting **JetFormBuilder Post Insert** trigger with a new form field name / value condition
+
+---
 
 **V 1.2.1 2024.06.16**
 
 * Fixed missing JetFormBuilder trigger registration process
+
+---
 
 **V 1.2 2024.06.16**
 
 * Two new trigger added to  WooCommerce: Advanced new order (Created), Review added
 * One new action: Place order
 
+---
+
 **V 1.1 2024.06.15**
 
 * New Triggers For Amelia Booking: Appointben created, Event booked
 * New Triggers for the JetReview - both work, submit, or approved
 * New Smartcodes for Jetreview
+
+---
 
 **V 1.0 2024.06.15**
 Release the kraken
