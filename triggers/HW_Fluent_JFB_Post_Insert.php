@@ -29,7 +29,7 @@ class HW_Fluent_JFB_Post_Insert extends BaseTrigger
     public function getFunnelSettingsDefaults()
     {
         return [
-            'subscription_status' => 'subscribed',
+            'subscription_status' => 'subscribed'
         ];
     }
 
@@ -48,7 +48,7 @@ class HW_Fluent_JFB_Post_Insert extends BaseTrigger
                 ],
                 'subscription_status_info' => [
                     'type'       => 'html',
-                    'info'       => '<b>' . __('An Automated double-optin email will be sent for new subscribers', 'fluentcampaign-pro') . '</b>',
+                    'info'       => '<b>' . __('An Automated double-optin email will be sent for new subscribers', 'hw-fluent-extendtriggers') . '</b>',
                     'dependency' => [
                         'depends_on' => 'subscription_status',
                         'operator'   => '=',
@@ -62,9 +62,12 @@ class HW_Fluent_JFB_Post_Insert extends BaseTrigger
     public function getFunnelConditionDefaults($funnel)
     {
         return [
-            'form_ids'   => [],
+            'form_ids'      => [],
             'post_statuses' => [],
-            'run_multiple' => 'no'
+            'field_name'    => '',
+            'field_value'   => '',
+            'match_type'    => 'equal',
+            'run_multiple'  => 'no'
         ];
     }
 
@@ -86,6 +89,28 @@ class HW_Fluent_JFB_Post_Insert extends BaseTrigger
                 'label'       => __('Select Post Statuses', 'hw-fluent-extendtriggers'),
                 'help'        => __('Select for which post statuses this automation will run', 'hw-fluent-extendtriggers'),
                 'inline_help' => __('Keep it blank to run on any post status', 'hw-fluent-extendtriggers')
+            ],
+            'field_name' => [
+                'type'        => 'input-text',
+                'label'       => __('Form Field Name', 'hw-fluent-extendtriggers'),
+                'placeholder' => __('Enter the form field name', 'hw-fluent-extendtriggers'),
+                'inline_help' => __('Specify the name of the form field to check.', 'hw-fluent-extendtriggers'),
+            ],
+            'field_value' => [
+                'type'        => 'input-text',
+                'label'       => __('Form Field Value', 'hw-fluent-extendtriggers'),
+                'placeholder' => __('Enter the expected value', 'hw-fluent-extendtriggers'),
+                'inline_help' => __('Specify the value the field should contain.', 'hw-fluent-extendtriggers'),
+            ],
+            'match_type' => [
+                'type'        => 'select',
+                'label'       => __('Form Field Match Type', 'hw-fluent-extendtriggers'),
+                'options'     => [
+                    [ 'id' => 'equal', 'title' => __('Equal', 'hw-fluent-extendtriggers') ],
+                    [ 'id' => 'contain', 'title' => __('Contain', 'hw-fluent-extendtriggers') ]
+                ],
+                'default'     => 'equal',
+                'inline_help' => __('Choose how to match the field value: exact match or contains.', 'hw-fluent-extendtriggers')
             ],
             'run_multiple' => [
                 'type'        => 'yes_no_check',
@@ -124,7 +149,9 @@ class HW_Fluent_JFB_Post_Insert extends BaseTrigger
             return;
         }
 
-        if (!$this->isProcessable($funnel, $formId, $subscriberData, $postStatus)) {
+        $submittedFields = jet_fb_context()->get_request();
+
+        if (!$this->isProcessable($funnel, $formId, $subscriberData, $postStatus, $submittedFields)) {
             return false;
         }
 
@@ -138,7 +165,7 @@ class HW_Fluent_JFB_Post_Insert extends BaseTrigger
         ]);
     }
 
-    private function isProcessable($funnel, $formId, $subscriberData, $postStatus)
+    private function isProcessable($funnel, $formId, $subscriberData, $postStatus, $submittedFields)
     {
         $conditions = $funnel->conditions;
 
@@ -148,6 +175,20 @@ class HW_Fluent_JFB_Post_Insert extends BaseTrigger
 
         if (!empty($conditions['post_statuses']) && !in_array($postStatus, $conditions['post_statuses'])) {
             return false;
+        }
+
+        $fieldName = $conditions['field_name'] ?? '';
+        $fieldValue = $conditions['field_value'] ?? '';
+        $matchType = $conditions['match_type'] ?? 'equal';
+
+        if (!empty($fieldName) && !empty($fieldValue)) {
+            $submittedValue = $submittedFields[$fieldName] ?? '';
+            if ($matchType === 'equal' && $submittedValue !== $fieldValue) {
+                return false;
+            }
+            if ($matchType === 'contain' && strpos($submittedValue, $fieldValue) === false) {
+                return false;
+            }
         }
 
         $subscriber = FunnelHelper::getSubscriber($subscriberData['email']);

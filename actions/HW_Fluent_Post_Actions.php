@@ -21,7 +21,7 @@ class HW_Fluent_Post_Actions extends BaseAction {
             'category'    => __('Posts', 'hw-fluent-extendtriggers'),
             'title'       => __('Update Posts', 'hw-fluent-extendtriggers'),
             'description' => __('Update post status for selected post types', 'hw-fluent-extendtriggers'),
-            'icon'        => 'fc-icon-update_post', 
+            'icon'        => 'fc-icon-trigger',
         ];
     }
     
