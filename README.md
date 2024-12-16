@@ -89,6 +89,12 @@ We will not stop here. I have a number of ideas for future additions and I'm als
 
 ## CHANGELOG
 
+**V 1.4.1 2024.12.16**
+
+* Fixed the Update user jetformbuilder trigger
+
+---
+
 **V 1.4 2024.12.16**
 
 From now on, you do not need fluentcrm pro, only if you want to use woocommerce specific triggers and actions.
