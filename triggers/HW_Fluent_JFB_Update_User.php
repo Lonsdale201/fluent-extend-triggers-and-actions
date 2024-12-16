@@ -114,25 +114,18 @@ class HW_Fluent_JFB_Update_User extends BaseTrigger
         // Check if the form has an update user action
         $hasUpdateUserAction = false;
         foreach ($handler->action_handler->form_actions as $action) {
-            if (is_object($action) && get_class($action) === 'Jet_Form_Builder\Actions\Types\Update_User') {
+            if (is_object($action) && get_class($action) === 'JFB_Modules\Actions_V2\Update_User\Update_User_Action') {
                 $hasUpdateUserAction = true;
                 break;
             }
-        }
+        }        
 
         if (!$hasUpdateUserAction) {
             error_log('Form does not have an update user action, skipping trigger.');
             return false;
         }
 
-        // Log the entire form data to inspect its structure
-        error_log('Form data: ' . print_r($formData, true));
-
         $subscriberData = FunnelHelper::prepareUserData($userId);
-
-        // Log the current subscriber data
-        error_log('Subscriber data: ' . print_r($subscriberData, true));
-
         // Find existing subscriber or create a new instance
         $subscriber = Subscriber::where('user_id', $subscriberData['user_id'])->first();
         if (!$subscriber) {
@@ -168,9 +161,9 @@ class HW_Fluent_JFB_Update_User extends BaseTrigger
             $multipleRun = Arr::get($conditions, 'run_multiple') == 'yes';
             if ($multipleRun) {
                 FunnelHelper::removeSubscribersFromFunnel($funnel->id, [$subscriber->id]);
-                error_log('Removed subscriber from funnel for multiple run');
+                // error_log('Removed subscriber from funnel for multiple run');
             } else {
-                error_log('Subscriber already in funnel and multiple run not allowed');
+                // error_log('Subscriber already in funnel and multiple run not allowed');
                 return false;
             }
         }
@@ -180,19 +173,13 @@ class HW_Fluent_JFB_Update_User extends BaseTrigger
 }
 
 add_action('jet-form-builder/form-handler/after-send', function($handler, $is_success) {
-    // Ensure that the form has an update user action
-    error_log('JetFormBuilder form handler after-send action triggered');
     if (!isset($handler->action_handler) || !is_array($handler->action_handler->form_actions)) {
-        error_log('Form actions is not an array or action_handler is not set.');
-        return;
+        return; 
     }
-
     foreach ($handler->action_handler->form_actions as $action) {
-        if (is_object($action) && get_class($action) === 'Jet_Form_Builder\Actions\Types\Update_User') {
-            error_log('Update User action found in form actions');
+        if (is_object($action) && get_class($action) === 'JFB_Modules\Actions_V2\Update_User\Update_User_Action') {
             do_action('jetformbuilder_update_user', $handler);
             return;
         }
     }
-    error_log('No Update User action found in form actions');
 }, 10, 2);

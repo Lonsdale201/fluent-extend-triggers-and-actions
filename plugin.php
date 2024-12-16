@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Fluent Extend Triggers and Actions
  * Description: Extra triggers, actions and others for JetFormBuilder, Woo, user roles, Jetreviews
- * Version: 1.4
+ * Version: 1.4.1
  * Author: Soczó Kristóf
  * Author URI: https://github.com/Lonsdale201/fluent-extend-triggers-and-actions
  * Text Domain: hw-fluent-extendtriggers
