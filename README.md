@@ -3,7 +3,7 @@ Extra triggers, actions and others for WooCommerce, Wordpress, JetFormBuilder, J
 
 ## Desc
 
-This extension provides additional add-ons to FluentCRM.
+This plugin provides additional add-ons to FluentCRM.
 
 7 triggers are currently available:
 
@@ -26,6 +26,9 @@ This extension provides additional add-ons to FluentCRM.
 
 > [!Note]
 > The plugin supports at the moment Jetformbuilder, Jetreviews, Woocommerce for the Triggers
+
+> [!WARNING]
+To use the plugin, you need **Fluentcrm**. For the WooCommerce specific functionality, you also need **Fluentcrm pro**.
 
 ## How to download?
 
@@ -82,8 +85,19 @@ We will not stop here. I have a number of ideas for future additions and I'm als
 - [ ] Data Store / Custom Content type compatibility
 - [ ] TutorLMS triggers
 
+---
 
 ## CHANGELOG
+
+**V 1.4 2024.12.16**
+
+From now on, you do not need fluentcrm pro, only if you want to use woocommerce specific triggers and actions.
+
+**Improvement**
+
+Better dependency checker method added.
+
+---
 
 **V 1.3 2024.12.14**
 
