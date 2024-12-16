@@ -1,8 +1,6 @@
 # Fluent Extend Triggers and Actions
 Extra triggers, actions and others for WooCommerce, Wordpress, JetFormBuilder, Jetreviews
 
-## CURRENT VERSION 1.2.1
-
 ## Desc
 
 This extension provides additional add-ons to FluentCRM.
