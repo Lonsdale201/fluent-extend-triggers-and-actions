@@ -2,6 +2,7 @@
 
 namespace HelloWP\FluentExtendTriggers\Includes;
 use HelloWP\FluentExtendTriggers\Includes\CustomWooEvent;
+use HelloWP\FluentExtendTriggers\Includes\Dependency;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -14,24 +15,24 @@ class TriggerManager {
     }
 
     public function registerTriggers() {
-        
+
         $triggers = [];
 
-         $triggers[] = '\HelloWP\FluentExtendTriggers\Triggers\HW_Fluent_Role_Changed';
+        $triggers[] = '\\HelloWP\\FluentExtendTriggers\\Triggers\\HW_Fluent_Role_Changed';
 
-        if ($this->isJetFormBuilderActive()) {
-            $triggers[] = '\HelloWP\FluentExtendTriggers\Triggers\HW_Fluent_JFB_Submission';
-            $triggers[] = '\HelloWP\FluentExtendTriggers\Triggers\HW_Fluent_JFB_Post_Insert';
-            $triggers[] = '\HelloWP\FluentExtendTriggers\Triggers\HW_Fluent_JFB_Update_User';
+        if (Dependency::isJetFormBuilderActive()) {
+            $triggers[] = '\\HelloWP\\FluentExtendTriggers\\Triggers\\HW_Fluent_JFB_Submission';
+            $triggers[] = '\\HelloWP\\FluentExtendTriggers\\Triggers\\HW_Fluent_JFB_Post_Insert';
+            $triggers[] = '\\HelloWP\\FluentExtendTriggers\\Triggers\\HW_Fluent_JFB_Update_User';
         }
 
-        if ($this->isJetReviewsActive()) {
-            $triggers[] = '\HelloWP\FluentExtendTriggers\Triggers\HW_Fluent_JetReview_Submit';
+        if (Dependency::isJetReviewsActive()) {
+            $triggers[] = '\\HelloWP\\FluentExtendTriggers\\Triggers\\HW_Fluent_JetReview_Submit';
         }
 
-        if ($this->isWooCommerceActive()) {
-            $triggers[] = '\HelloWP\FluentExtendTriggers\Triggers\AdvancedNewOrderTrigger';
-            $triggers[] = '\HelloWP\FluentExtendTriggers\Triggers\ReviewAddedTrigger';
+        if (Dependency::isWooCommerceActive() && Dependency::isFluentCRMProActive()) {
+            $triggers[] = '\\HelloWP\\FluentExtendTriggers\\Triggers\\AdvancedNewOrderTrigger';
+            $triggers[] = '\\HelloWP\\FluentExtendTriggers\\Triggers\\ReviewAddedTrigger';
 
             new CustomWooEvent();
         }
@@ -41,18 +42,6 @@ class TriggerManager {
                 new $triggerClass();
             }
         }
-    }
-
-    private function isJetFormBuilderActive() {
-        return class_exists('Jet_Form_Builder\Plugin');
-    }
-
-    private function isJetReviewsActive() {
-        return class_exists('Jet_Reviews');
-    }
-
-    private function isWooCommerceActive() {
-        return class_exists('WooCommerce');
     }
 }
 

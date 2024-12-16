@@ -2,6 +2,8 @@
 
 namespace HelloWP\FluentExtendTriggers\Includes;
 
+use HelloWP\FluentExtendTriggers\Includes\Dependency;
+
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -14,11 +16,11 @@ class ActionManager {
 
     public function registerActions() {
         $actions = [
-            '\HelloWP\FluentExtendTriggers\Actions\HW_Fluent_Post_Actions'
+            '\\HelloWP\\FluentExtendTriggers\\Actions\\HW_Fluent_Post_Actions'
         ];
 
-        if ($this->isWooCommerceActive()) {
-            $actions[] = '\HelloWP\FluentExtendTriggers\Actions\HW_Fluent_Woo_Place_Order';
+        if (Dependency::isWooCommerceActive() && Dependency::isFluentCRMProActive()) {
+            $actions[] = '\\HelloWP\\FluentExtendTriggers\\Actions\\HW_Fluent_Woo_Place_Order';
         }
 
         foreach ($actions as $actionClass) {
@@ -26,9 +28,5 @@ class ActionManager {
                 new $actionClass();
             }
         }
-    }
-
-    private function isWooCommerceActive() {
-        return class_exists('WooCommerce');
     }
 }

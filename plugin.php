@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Fluent Extend Triggers and Actions
  * Description: Extra triggers, actions and others for JetFormBuilder, Woo, user roles, Jetreviews
- * Version: 1.3
+ * Version: 1.4
  * Author: Soczó Kristóf
  * Author URI: https://github.com/Lonsdale201/fluent-extend-triggers-and-actions
  * Text Domain: hw-fluent-extendtriggers
@@ -79,11 +79,6 @@ final class HW_Fluent_Extend_Main {
             add_action('admin_notices', [$this, 'admin_notice_minimum_fluentcrm_version']);
         }
 
-        if (!defined('FLUENTCAMPAIGN_PLUGIN_VERSION') || version_compare(FLUENTCAMPAIGN_PLUGIN_VERSION, self::MINIMUM_FLUENTCAMPAIGN_VERSION, '<')) {
-            $compatible = false;
-            add_action('admin_notices', [$this, 'admin_notice_minimum_fluentcampaign_version']);
-        }
-
         if (version_compare(get_bloginfo('version'), self::MINIMUM_WORDPRESS_VERSION, '<')) {
             $compatible = false;
             add_action('admin_notices', [$this, 'admin_notice_minimum_wordpress_version']);
@@ -103,15 +98,6 @@ final class HW_Fluent_Extend_Main {
         }
         echo '<div class="notice notice-warning is-dismissible"><p>';
         echo sprintf(__('Fluent Extend Triggers and Actions requires FluentCRM version %s or greater. Please update FluentCRM to use this plugin.', 'hw-fluent-extendtriggers'), self::MINIMUM_FLUENTCRM_VERSION);
-        echo '</p></div>';
-    }
-
-    public function admin_notice_minimum_fluentcampaign_version() {
-        if (!current_user_can('manage_options')) {
-            return;
-        }
-        echo '<div class="notice notice-warning is-dismissible"><p>';
-        echo sprintf(__('Fluent Extend Triggers and Actions requires FluentCRM Pro version %s or greater. Please update FluentCRM Pro to use this plugin.', 'hw-fluent-extendtriggers'), self::MINIMUM_FLUENTCAMPAIGN_VERSION);
         echo '</p></div>';
     }
 
