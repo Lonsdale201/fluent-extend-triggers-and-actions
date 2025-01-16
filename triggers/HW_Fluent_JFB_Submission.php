@@ -85,7 +85,7 @@ class HW_Fluent_JFB_Submission extends BaseTrigger
                 'type'          => 'input-text',
                 'label'         => __('Email Field Mapping', 'hw-fluent-extendtriggers'),
                 'placeholder'   => __('Form Field Name', 'hw-fluent-extendtriggers'),
-                'inline_help'   => __('Please provide the "Form Field Name" for the email field in your form.', 'hw-fluent-extendtriggers')
+                'inline_help'   => __('Provide the name of the form field that collects the email address. This will be used to register the submitter in the CRM. Optional, not mandatory.', 'hw-fluent-extendtriggers')
             ],
             'run_multiple' => [
                 'type'        => 'yes_no_check',

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Fluent Extend Triggers and Actions
  * Description: Extra triggers, actions and others for JetFormBuilder, Woo, user roles, Jetreviews
- * Version: 1.4.1
+ * Version: 1.4.2
  * Author: Soczó Kristóf
  * Author URI: https://github.com/Lonsdale201/fluent-extend-triggers-and-actions
  * Text Domain: hw-fluent-extendtriggers
@@ -54,8 +54,14 @@ final class HW_Fluent_Extend_Main {
         new \HelloWP\FluentExtendTriggers\Includes\CustomControllers();
         new \HelloWP\FluentExtendTriggers\Includes\ActionManager();
 
+
         // smartcodes
         new \HelloWP\FluentExtendTriggers\SmartCodes\PostSmartCodes();
+
+        if (class_exists('WooCommerce')) {
+        new \HelloWP\FluentExtendTriggers\SmartCodes\WooOrderMeta();
+        }
+
         if (class_exists('Jet_Reviews')) {
             new \HelloWP\FluentExtendTriggers\SmartCodes\JetRewSmartCodes();
         }

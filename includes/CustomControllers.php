@@ -15,6 +15,7 @@ class CustomControllers
         add_filter('fluentcrm_ajax_options_woo_payment_methods', [$this, 'get_woo_payment_methods'], 10, 3);
         add_filter('fluentcrm_ajax_options_woo_shipping_methods', [$this, 'get_woo_shipping_methods'], 10, 3);
         add_filter('fluentcrm_ajax_options_available_roles', [$this, 'get_available_roles'], 10, 3);
+        add_filter('fluentcrm_ajax_options_cct_list', [$this, 'get_cct_list'], 10, 3);
     }
 
     public function get_jfb_forms($options, $search, $includedIds)
@@ -119,5 +120,5 @@ class CustomControllers
         }
 
         return $options;
-    }
+    }    
 }

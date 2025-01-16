@@ -90,6 +90,13 @@ class AdvancedNewOrderTrigger extends BaseTrigger
                 'help'        => __('Select for which products this automation will run', 'hw-fluent-extendtriggers'),
                 'inline_help' => __('Keep it blank to run to any product purchase', 'hw-fluent-extendtriggers')
             ],
+            'product_name_contains' => [
+                'type'        => 'input-text',
+                'label'       => __('OR Product Name Contains', 'hw-fluent-extendtriggers'),
+                'placeholder' => __('Type part of the product name here', 'hw-fluent-extendtriggers'),
+                'help'        => __('Automation will run if the purchased product name includes this text (case-insensitive)', 'hw-fluent-extendtriggers'),
+                'inline_help' => __('Leave blank to ignore product name', 'hw-fluent-extendtriggers')
+            ],
             'product_categories' => [
                 'type'        => 'rest_selector',
                 'option_key'  => 'woo_categories',
@@ -209,61 +216,80 @@ class AdvancedNewOrderTrigger extends BaseTrigger
     }
 
     private function isProcessable($funnel, $subscriberData, $order)
-    {
-        $conditions = (array) $funnel->conditions;
-        $productIds = Arr::get($conditions, 'product_ids', []);
-        $productCategories = Arr::get($conditions, 'product_categories', []);
-        $paymentMethods = Arr::get($conditions, 'payment_methods', []);
-        $shippingMethods = Arr::get($conditions, 'shipping_methods', []);
-        $relation = Arr::get($conditions, 'relation', 'or');
+{
+    $conditions         = (array) $funnel->conditions;
+    $productIds         = Arr::get($conditions, 'product_ids', []);
+    $productNameFilter  = Arr::get($conditions, 'product_name_contains', '');
+    $productCategories  = Arr::get($conditions, 'product_categories', []);
+    $paymentMethods     = Arr::get($conditions, 'payment_methods', []);
+    $shippingMethods    = Arr::get($conditions, 'shipping_methods', []);
+    $relation           = Arr::get($conditions, 'relation', 'or');
 
-        $orderProductIds = [];
-        $orderProductCategories = [];
+    $orderProductIds         = [];
+    $orderProductCategories  = [];
 
+    foreach ($order->get_items() as $item) {
+        $product = $item->get_product();
+        if (!$product) {
+            continue;
+        }
+
+        $orderProductIds[] = $product->get_id();
+        $orderProductCategories = array_merge(
+            $orderProductCategories, 
+            wp_get_post_terms($product->get_id(), 'product_cat', ['fields' => 'ids'])
+        );
+    }
+
+    if (!empty($productIds) && !array_intersect($productIds, $orderProductIds)) {
+        error_log('Order products do not match funnel conditions for order ID: ' . $order->get_id());
+        return false;
+    }
+
+    if ($productNameFilter) {
+        // Stripos a case-insensitive 
+        $matchedName = false;
         foreach ($order->get_items() as $item) {
             $product = $item->get_product();
-            $orderProductIds[] = $product->get_id();
-            $orderProductCategories = array_merge($orderProductCategories, wp_get_post_terms($product->get_id(), 'product_cat', ['fields' => 'ids']));
-        }
-
-        // Check if order matches product conditions
-        if (!empty($productIds) && !array_intersect($productIds, $orderProductIds)) {
-            error_log('Order products do not match funnel conditions for order ID: ' . $order->get_id());
-            return false;
-        }
-
-        // Check if order matches category conditions
-        if (!empty($productCategories) && !array_intersect($productCategories, $orderProductCategories)) {
-            return false;
-        }
-
-        // Get shipping method IDs
-        $orderShippingMethods = [];
-        foreach ($order->get_shipping_methods() as $shipping_item) {
-            $orderShippingMethods[] = $shipping_item->get_method_id() . ':' . $shipping_item->get_instance_id();
-        }
-
-        // Check if order matches payment method and shipping method conditions
-        $paymentMatch = empty($paymentMethods) || in_array($order->get_payment_method(), $paymentMethods);
-        $shippingMatch = empty($shippingMethods) || !empty(array_intersect($shippingMethods, $orderShippingMethods));
-
-        if ($relation == 'and' && (!$paymentMatch || !$shippingMatch)) {
-            return false;
-        } elseif ($relation == 'or' && (!$paymentMatch && !$shippingMatch)) {
-            return false;
-        }
-
-        $subscriber = FunnelHelper::getSubscriber($subscriberData['email']);
-
-        if ($subscriber && FunnelHelper::ifAlreadyInFunnel($funnel->id, $subscriber->id)) {
-            $multipleRun = Arr::get($conditions, 'run_multiple') == 'yes';
-            if ($multipleRun) {
-                FunnelHelper::removeSubscribersFromFunnel($funnel->id, [$subscriber->id]);
-            } else {
-                return false;
+            if ($product && stripos($product->get_name(), $productNameFilter) !== false) {
+                $matchedName = true;
+                break;
             }
         }
-
-        return true;
+        if (!$matchedName) {
+            return false;
+        }
     }
+
+    if (!empty($productCategories) && !array_intersect($productCategories, $orderProductCategories)) {
+        return false;
+    }
+
+    $orderShippingMethods = [];
+    foreach ($order->get_shipping_methods() as $shipping_item) {
+        $orderShippingMethods[] = $shipping_item->get_method_id() . ':' . $shipping_item->get_instance_id();
+    }
+
+    $paymentMatch = empty($paymentMethods) || in_array($order->get_payment_method(), $paymentMethods);
+    $shippingMatch = empty($shippingMethods) || !empty(array_intersect($shippingMethods, $orderShippingMethods));
+
+    if ($relation == 'and' && (!$paymentMatch || !$shippingMatch)) {
+        return false;
+    } elseif ($relation == 'or' && (!$paymentMatch && !$shippingMatch)) {
+        return false;
+    }
+
+    $subscriber = FunnelHelper::getSubscriber($subscriberData['email']);
+    if ($subscriber && FunnelHelper::ifAlreadyInFunnel($funnel->id, $subscriber->id)) {
+        $multipleRun = Arr::get($conditions, 'run_multiple') == 'yes';
+        if ($multipleRun) {
+            FunnelHelper::removeSubscribersFromFunnel($funnel->id, [$subscriber->id]);
+        } else {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 }
